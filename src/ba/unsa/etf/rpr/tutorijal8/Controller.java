@@ -2,13 +2,19 @@ package ba.unsa.etf.rpr.tutorijal8;
 
 import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -81,6 +87,21 @@ public class Controller implements Initializable {
         }
 
     }
+    private void otvoriFile() {
+        try {
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("formular.fxml"));
+            stage.setTitle("Formular");
+            stage.setScene(new Scene(root, 317, 200));
+            stage.initOwner(listaPuteva.getScene().getWindow());
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setResizable(false);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 }
