@@ -17,7 +17,7 @@ public class Controller implements Initializable {
     public Button findBtn;
     public TextField inputField;
     public ListView<String> listaPuteva;
-    public File root = new File("/Users/nasiha");
+    public File root = new File(System.getProperty("user.home"));
     public Button stopBtn;
 
     public Controller(FileList model) {
