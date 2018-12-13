@@ -2,6 +2,7 @@ package ba.unsa.etf.rpr.tutorijal8;
 
 import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -13,6 +14,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -42,7 +44,9 @@ public class Controller implements Initializable {
         stopBtn.setDisable(false);
         Finder myFinder = new Finder();
         Thread myThread = new Thread(myFinder);
+        prekidacZaPretrazivanje(true);
         myThread.start();
+
     }
 
     public void prekini(javafx.event.ActionEvent actionEvent) {
@@ -50,6 +54,10 @@ public class Controller implements Initializable {
         findBtn.setDisable(false);
     }
 
+    public void prekidacZaPretrazivanje(boolean vrijednost) {
+        findBtn.setDisable(vrijednost);
+        stopBtn.setDisable(!vrijednost);
+    }
 
     public class Finder implements Runnable{
 
@@ -99,6 +107,15 @@ public class Controller implements Initializable {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+    public void otvori(MouseEvent mouseEvent) {
+        ObservableList file = listaPuteva.getSelectionModel().getSelectedItems();
+        if (file == null){
+            System.out.println("Nista nije izabrano!");
+        }
+        else {
+            otvoriFile();
         }
     }
 
